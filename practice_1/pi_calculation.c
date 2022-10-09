@@ -11,7 +11,8 @@ double xcor;
 double ycor;
 double hipotenusa;
 
-#define NUM_THREADS    5
+// Define number of threads: 1, 2, 4, 8, or 16
+#define NUM_THREADS    4
 
 void *pi(void *threadid){
     
@@ -27,9 +28,7 @@ void *pi(void *threadid){
             circle_count++;
         }
         j++;
-        // printf("Xcor = %f, Ycor = %f\n", xcor, ycor);
-        //printf("c = %d\n", circle_count);
-        
+
     }
     double PI = 4.0*(double)circle_count/(double)npoints;
     printf("PI = %f\n", PI);
