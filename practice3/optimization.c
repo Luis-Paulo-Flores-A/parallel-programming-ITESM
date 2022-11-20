@@ -90,15 +90,15 @@ int main(int argc, char *argv[])
         int matriz_threads[MAX][plate_length][plate_length];
         llenarMatriz(plate_length,plate_length,matriz_threads[0]);
 
-        printf("Matriz de temperaturas de caracteres: \n");
+        printf("Matriz con caracteres C o H según la temperatura: \n");
         imprimirMatriz(plate_length, plate_length,matriz_principal);
         printf("\n");
 
-        printf("Matriz de temperatura numerica antes del llenado: \n");
+        printf("Matriz de valores antes del llenado: \n");
         imprime_matriz_thread(matriz_threads[0]);
         printf("\n");
 
-        //THREAD LLENADO
+        //LLENADO DE LA MATRIZ
         pthread_t llenado_matriz;
         rc = pthread_create(&llenado_matriz,NULL,&llena_matriz_thread,matriz_threads[0]);
         if (rc){
@@ -107,18 +107,18 @@ int main(int argc, char *argv[])
         }
         pthread_join(llenado_matriz, NULL);
 
-        printf("Matriz de temperatura numerica despues del llenado: \n");
+        printf("Matriz de valores despues del llenado: \n");
         imprime_matriz_thread(matriz_threads[0]);
-        
-        //HEAT EQUATION 
+        printf("\n");
 
-        //PROGRAMACION PARALELA
+        //PROGRAMACION PARALELA PARA HEAT EQUATION 
         int thread_num = 1;
         if (argc > 1) {
             thread_num = atoi(argv[1]);
         }
         omp_set_num_threads(thread_num);
         printf("OMP defined, threadct = %d \n", thread_num);
+        printf("\n");
 
         calculate(matriz_threads);
         printf("Calculo de heat ecuation en matriz: \n");
